@@ -6,14 +6,14 @@
 #    By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/10 17:12:08 by nildruon          #+#    #+#              #
-#    Updated: 2026/03/10 17:42:49 by nildruon         ###   ########.fr        #
+#    Updated: 2026/03/17 14:28:25 by nildruon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 CFLAGS = -Werror -Wall -Wextra -g -Ilibft_lib
 
-CFILES = extract_data.c main.c
+CFILES = extract_data.c extract_data_help.c main.c
 
 OFILES = $(CFILES:.c=.o)
 

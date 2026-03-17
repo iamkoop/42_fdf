@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 13:42:34 by nildruon          #+#    #+#             */
-/*   Updated: 2025/10/09 12:01:11 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/03/16 12:33:05 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ size_t	ft_strlen(const char *s)
 	size_t	size;
 
 	size = 0;
+	if (!s)
+		return (0);
 	while (s[size])
 	{
 		size++;

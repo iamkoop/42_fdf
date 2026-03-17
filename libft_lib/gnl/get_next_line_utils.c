@@ -6,13 +6,13 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 11:30:43 by nildruon          #+#    #+#             */
-/*   Updated: 2025/12/06 17:04:44 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/03/16 12:47:34 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
+size_t	ft_strlength(const char *s)
 {
 	size_t	size;
 
@@ -32,7 +32,7 @@ char	*ft_strdup(const char *s)
 	char	*cpy;
 	size_t	i;
 
-	len = ft_strlen(s);
+	len = ft_strlength(s);
 	cpy = (char *)malloc(len + 1);
 	if (!cpy)
 		return (NULL);

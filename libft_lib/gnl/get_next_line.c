@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 11:30:43 by nildruon          #+#    #+#             */
-/*   Updated: 2026/03/11 12:04:13 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/03/16 19:37:41 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ static char	*ft_strjoin(char *buffer, char **remainder)
 
 	if (!*remainder)
 		return (concant = ft_strdup(buffer));
-	buffer_l = ft_strlen(buffer);
-	remainder_len = ft_strlen(*remainder);
+	buffer_l = ft_strlength(buffer);
+	remainder_len = ft_strlength(*remainder);
 	concant = malloc(buffer_l + remainder_len + 1);
 	if (!concant)
 		return (free(*remainder),*remainder = NULL, NULL);

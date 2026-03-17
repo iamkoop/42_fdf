@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 13:55:28 by nildruon          #+#    #+#             */
-/*   Updated: 2026/03/11 12:04:45 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/03/16 12:47:25 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # endif
 
 char	*get_next_line(int fd);
-size_t	ft_strlen(const char *s);
+size_t	ft_strlength(const char *s);
 char	*ft_strdup(const char *s);
 char	*read_buffer(int *read_r, int fd);
 int		found_new_line(char *str);
