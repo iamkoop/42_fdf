@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 11:30:43 by nildruon          #+#    #+#             */
-/*   Updated: 2026/03/16 19:37:41 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/03/20 12:04:56 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,13 +84,13 @@ char	*get_next_line(int fd)
 
 	r = 1;
 	if (fd < 0 || BUFFER_SIZE <= 0)
-		return(free(remainder), remainder = NULL, NULL);
+		return (free(remainder), remainder = NULL, NULL);
 	line = NULL;
 	while (!found_new_line(remainder) && r > 0)
 	{
 		line = read_buffer(&r, fd);
-		if(r == -1)
-			return(free(remainder), remainder = NULL, NULL);
+		if (r == -1)
+			return (free(remainder), remainder = NULL, NULL);
 		if (r == 0)
 			break ;
 		if (!line)

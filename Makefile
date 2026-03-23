@@ -6,14 +6,16 @@
 #    By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/10 17:12:08 by nildruon          #+#    #+#              #
-#    Updated: 2026/03/17 14:28:25 by nildruon         ###   ########.fr        #
+#    Updated: 2026/03/23 17:22:02 by nildruon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Werror -Wall -Wextra -g -Ilibft_lib
+CFLAGS = -Werror -Wall -Wextra -g -Ilibft_lib 
 
-CFILES = extract_data.c extract_data_help.c main.c
+FDFFLAGS = -L. -lmlx -lXext -lX11 -lm
+
+CFILES = draw_line.c projection.c extract_data.c extract_data_help.c main.c
 
 OFILES = $(CFILES:.c=.o)
 
@@ -36,7 +38,7 @@ all: $(NAME)
 
 $(NAME): $(OFILES)
 	make -C $(LIBFT)
-	$(CC) $(CFLAGS) $(OFILES) $(LIBFT_A) -o $(NAME)
+	$(CC) $(CFLAGS) $(OFILES) $(LIBFT_A) $(FDFFLAGS) -o $(NAME)
 
 fclean: clean
 	$(REMOVE) $(NAME)
