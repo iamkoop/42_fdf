@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 15:08:07 by nildruon          #+#    #+#             */
-/*   Updated: 2026/03/23 17:27:13 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/03/24 19:28:07 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ typedef struct s_data
 {
 	int	height;
 	int	colour;
+	int iso_x;
+	int iso_y;
 }		t_data;
 
 typedef struct	s_img_data {
@@ -36,11 +38,21 @@ typedef struct	s_img_data {
 
 typedef struct s_line_data
 {
-	int	x_start;
-	int	y_start;
-	int x_end;
-	int y_end;
+	int	x1;
+	int	y1;
+	int x2;
+	int y2;
 }		t_line_data;
+
+typedef struct s_plot_line_vars
+{
+	int dx;
+	int sx;
+	int dy;
+	int sy;
+	int error;
+	int e2;
+}		t_plot_line_vars;
 
 void draw_line(t_img_data *img, t_line_data *line_data, int color);
 int		window_main(t_data	**data);
