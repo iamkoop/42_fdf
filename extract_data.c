@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 17:42:54 by nildruon          #+#    #+#             */
-/*   Updated: 2026/03/20 12:48:01 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/03/25 15:04:43 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static int	find_size(int *height, int *length, char *file)
 	return (1);
 }
 
-t_data	**extract_data(char *file, int *s)
+t_data	**extract_data(char *file, int *s, t_input_size *input_size)
 {
 	t_data	**data;
 	int		*size;
@@ -69,6 +69,8 @@ t_data	**extract_data(char *file, int *s)
 	size[1] = 0;
 	if (!find_size(&size[0], &size[1], file))
 		return (free(size), NULL);
+	input_size->height = size[0];
+	input_size->width = size[1];
 	data = create_2d_data_arr(file, size[0], size[1]);
 	if (!data)
 		return (free(size), NULL);

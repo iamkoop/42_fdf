@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 15:08:07 by nildruon          #+#    #+#             */
-/*   Updated: 2026/03/24 19:28:07 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/03/25 17:26:16 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <fcntl.h>
 # include <errno.h>
 # include <stdio.h>
+# include <math.h>
 
 typedef struct s_data
 {
@@ -27,6 +28,12 @@ typedef struct s_data
 	int iso_x;
 	int iso_y;
 }		t_data;
+
+typedef struct s_input_size
+{
+	int	height;
+	int	width;
+}		t_input_size;
 
 typedef struct	s_img_data {
 	void	*img;
@@ -54,10 +61,11 @@ typedef struct s_plot_line_vars
 	int e2;
 }		t_plot_line_vars;
 
+void draw_full_img(t_img_data *img, t_input_size input_size, t_data	**data);
 void draw_line(t_img_data *img, t_line_data *line_data, int color);
-int		window_main(t_data	**data);
+int		window_main(t_data	**data, t_input_size input_size);
 void	free_the_data(void **data, int until_where);
 t_data	**create_2d_data_arr(char *file, int height, int width);
-t_data	**extract_data(char *file, int *s);
+t_data	**extract_data(char *file, int *s, t_input_size *input_size);
 int		main(int argc, char **argv);
 #endif
