@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 15:08:07 by nildruon          #+#    #+#             */
-/*   Updated: 2026/03/25 17:26:16 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/03/30 16:21:00 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,26 @@ typedef struct s_plot_line_vars
 	int error;
 	int e2;
 }		t_plot_line_vars;
+
+typedef struct s_scaling
+{
+	int offset_x;
+	int offset_y;
+	int zoom;
+	int zoom_in;
+	int height_scaling;
+	int exec_zoom;
+}		t_scaling;
+
+typedef struct s_limit
+{
+	int upper_limit;
+	int lower_limit;
+	int left_limit;
+	int right_limit;
+	int width;
+	int height;
+}		t_limit;
 
 void draw_full_img(t_img_data *img, t_input_size input_size, t_data	**data);
 void draw_line(t_img_data *img, t_line_data *line_data, int color);
