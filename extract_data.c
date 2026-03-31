@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 17:42:54 by nildruon          #+#    #+#             */
-/*   Updated: 2026/03/25 15:04:43 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/03/31 21:24:59 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	find_line_len(char *curr_line)
 	return (len);
 }
 
-static int	find_size(int *height, int *length, char *file)
+static int	find_size(int *height, int *width, char *file)
 {
 	int		fd;
 	char	*line;
@@ -43,9 +43,9 @@ static int	find_size(int *height, int *length, char *file)
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (((*height > 0) && (*length != find_line_len(line))))
+		if (((*height > 0) && (*width != find_line_len(line))))
 			return (perror("invalid map"), free(line), get_next_line(-42), 0);
-		*length = find_line_len(line);
+		*width = find_line_len(line);
 		free(line);
 		line = get_next_line(fd);
 		*height += 1;
@@ -60,20 +60,12 @@ static int	find_size(int *height, int *length, char *file)
 t_data	**extract_data(char *file, int *s, t_input_size *input_size)
 {
 	t_data	**data;
-	int		*size;
 
-	size = malloc(sizeof(int) * 2);
-	if (!size)
+	if (!find_size(&input_size->height, &input_size->width, file))
 		return (NULL);
-	size[0] = 0;
-	size[1] = 0;
-	if (!find_size(&size[0], &size[1], file))
-		return (free(size), NULL);
-	input_size->height = size[0];
-	input_size->width = size[1];
-	data = create_2d_data_arr(file, size[0], size[1]);
+	data = create_2d_data_arr(file, input_size->height, input_size->width);
 	if (!data)
-		return (free(size), NULL);
-	*s = size[0];
-	return (free(size), data);
+		return (NULL);
+	*s = input_size->height;
+	return (data);
 }

@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:43:46 by nildruon          #+#    #+#             */
-/*   Updated: 2026/03/25 15:08:56 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/03/31 21:15:07 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	free_the_data(void **data, int until_where)
 
 int	main(int argc, char **argv)
 {
-	t_data	**data;
+	t_data			**data;
 	int				size;
 	int				win;
 	t_input_size	input_size;
@@ -54,7 +54,7 @@ int	main(int argc, char **argv)
 	input_size.width = 0;
 	data = extract_data(argv[1], &size, &input_size);
 	if (!data)
-		return (0);	
+		return (0);
 	win = window_main(data, input_size);
 	if (!win)
 		return (0);

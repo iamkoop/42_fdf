@@ -1,159 +1,165 @@
 {
-	"version": "0.2.0",
-	"configurations": [
-		{
-			"name": "Debug FDF - 42.fdf",
-			"type": "cppdbg",
-			"request": "launch",
-			"program": "${workspaceFolder}/fdf",
-			"args": [
-				"maps/42.fdf"
-			],
-			"stopAtEntry": false,
-			"cwd": "${workspaceFolder}",
-			"environment": [],
-			"externalConsole": false,
-			"MIMode": "gdb",
-			"preLaunchTask": "make re",
-			"setupCommands": [
-				{
-					"description": "Enable pretty-printing for gdb",
-					"text": "-enable-pretty-printing",
-					"ignoreFailures": true
-				}
-			]
-		},
-		{
-			"name": "Debug FDF - mars.fdf",
-			"type": "cppdbg",
-			"request": "launch",
-			"program": "${workspaceFolder}/fdf",
-			"args": [
-				"maps/mars.fdf"
-			],
-			"stopAtEntry": false,
-			"cwd": "${workspaceFolder}",
-			"environment": [],
-			"externalConsole": false,
-			"MIMode": "gdb",
-			"preLaunchTask": "make re",
-			"setupCommands": [
-				{
-					"description": "Enable pretty-printing for gdb",
-					"text": "-enable-pretty-printing",
-					"ignoreFailures": true
-				}
-			]
-		},
-		{
-			"name": "Debug FDF - pyra.fdf",
-			"type": "cppdbg",
-			"request": "launch",
-			"program": "${workspaceFolder}/fdf",
-			"args": [
-				"maps/pyra.fdf"
-			],
-			"stopAtEntry": false,
-			"cwd": "${workspaceFolder}",
-			"environment": [],
-			"externalConsole": false,
-			"MIMode": "gdb",
-			"preLaunchTask": "make re",
-			"setupCommands": [
-				{
-					"description": "Enable pretty-printing for gdb",
-					"text": "-enable-pretty-printing",
-					"ignoreFailures": true
-				}
-			]
-		},
-		{
-			"name": "Debug FDF - elem.fdf",
-			"type": "cppdbg",
-			"request": "launch",
-			"program": "${workspaceFolder}/fdf",
-			"args": [
-				"maps/elem.fdf"
-			],
-			"stopAtEntry": false,
-			"cwd": "${workspaceFolder}",
-			"environment": [],
-			"externalConsole": false,
-			"MIMode": "gdb",
-			"preLaunchTask": "make re",
-			"setupCommands": [
-				{
-					"description": "Enable pretty-printing for gdb",
-					"text": "-enable-pretty-printing",
-					"ignoreFailures": true
-				}
-			]
-		},
-		{
-			"name": "Debug FDF - julia.fdf",
-			"type": "cppdbg",
-			"request": "launch",
-			"program": "${workspaceFolder}/fdf",
-			"args": [
-				"maps/julia.fdf"
-			],
-			"stopAtEntry": false,
-			"cwd": "${workspaceFolder}",
-			"environment": [],
-			"externalConsole": false,
-			"MIMode": "gdb",
-			"preLaunchTask": "make re",
-			"setupCommands": [
-				{
-					"description": "Enable pretty-printing for gdb",
-					"text": "-enable-pretty-printing",
-					"ignoreFailures": true
-				}
-			]
-		},
-		{
-			"name": "Debug FDF - basictest.fdf",
-			"type": "cppdbg",
-			"request": "launch",
-			"program": "${workspaceFolder}/fdf",
-			"args": [
-				"maps/basictest.fdf"
-			],
-			"stopAtEntry": false,
-			"cwd": "${workspaceFolder}",
-			"environment": [],
-			"externalConsole": false,
-			"MIMode": "gdb",
-			"preLaunchTask": "make re",
-			"setupCommands": [
-				{
-					"description": "Enable pretty-printing for gdb",
-					"text": "-enable-pretty-printing",
-					"ignoreFailures": true
-				}
-			]
-		},
-		{
-			"name": "Debug FDF - test.fdf",
-			"type": "cppdbg",
-			"request": "launch",
-			"program": "${workspaceFolder}/fdf",
-			"args": [
-				"test.fdf"
-			],
-			"stopAtEntry": false,
-			"cwd": "${workspaceFolder}",
-			"environment": [],
-			"externalConsole": false,
-			"MIMode": "gdb",
-			"preLaunchTask": "make re",
-			"setupCommands": [
-				{
-					"description": "Enable pretty-printing for gdb",
-					"text": "-enable-pretty-printing",
-					"ignoreFailures": true
-				}
-			]
-		}
-	]
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug FDF - 42.fdf",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/fdf",
+            "args": ["maps/42.fdf"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "preLaunchTask": "make re",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "Debug FDF - mars.fdf",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/fdf",
+            "args": ["maps/mars.fdf"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "preLaunchTask": "make re",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "Debug FDF - pyra.fdf",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/fdf",
+            "args": ["maps/pyra.fdf"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "preLaunchTask": "make re",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "Debug FDF - elem.fdf",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/fdf",
+            "args": ["maps/elem.fdf"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "preLaunchTask": "make re",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "Debug FDF - julia.fdf",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/fdf",
+            "args": ["maps/julia.fdf"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "preLaunchTask": "make re",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "Debug FDF - basictest.fdf",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/fdf",
+            "args": ["maps/basictest.fdf"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "preLaunchTask": "make re",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "Debug FDF - ohnepixel.fdf",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/fdf",
+            "args": ["ohnepixel.fdf"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "preLaunchTask": "make re",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "Debug CURRENT File",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/fdf",
+            "args": ["${file}"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "preLaunchTask": "make re",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        }
+    ]
 }
