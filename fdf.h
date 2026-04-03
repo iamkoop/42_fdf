@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 15:08:07 by nildruon          #+#    #+#             */
-/*   Updated: 2026/04/03 18:55:05 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/04/03 19:46:53 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	set_scaling(t_scaling *scaling);
 
 void	draw_full_img(t_img_data *img, t_input_size input_size, t_data	**data);
 void	draw_line(t_img_data *img, t_line_data *line_data, int color);
-int		window_main(t_data	**data, t_input_size input_size);
+int		window_main(t_data	**data, t_input_size input_size,t_vars *vars);
 void	free_the_data(void **data, int until_where);
 t_data	**create_2d_data_arr(char *file, int height, int width);
 t_data	**extract_data(char *file, int *s, t_input_size *input_size);

@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:43:46 by nildruon          #+#    #+#             */
-/*   Updated: 2026/04/03 19:08:45 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/04/03 19:46:23 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	main(int argc, char **argv)
 	int				size;
 	int				win;
 	t_input_size	input_size;
+	t_vars		vars = {0};
 
 	if (argc != 2)
 		return (ft_putstr_fd("Usage : ./fdf <filename>", 2), 0);
@@ -54,7 +55,7 @@ int	main(int argc, char **argv)
 	data = extract_data(argv[1], &size, &input_size);
 	if (!data)
 		return (0);
-	win = window_main(data, input_size);
+	win = window_main(data, input_size, &vars);
 	if (!win)
 		return (0);
 	free_the_data((void **)data, size -1);
