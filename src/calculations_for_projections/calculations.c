@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 07:22:05 by nildruon          #+#    #+#             */
-/*   Updated: 2026/04/03 07:23:55 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/04/03 08:07:22 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	set_iso_coords(t_data	**dat, t_input_size input_s, t_scaling scl)
 			if (!scl.exec_zoom)
 			{
 				dat[y][x].iso_x = (x - y) * cos(angl) * 100;
-				dat[y][x].iso_y = (x + y) * sin(angl) - dat[y][x].height * 100;
+				dat[y][x].iso_y = (x + y) * sin(angl) * 100 - dat[y][x].height * 100;
 			}
 			else
 				set_iso_xy_help(dat, scl, x, y);

@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 14:27:18 by nildruon          #+#    #+#             */
-/*   Updated: 2026/04/03 07:17:21 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/04/03 08:06:00 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static t_data	fill_with_data(char *s)
 	int		len;
 
 	len = 0;
-	data.height = 0;
 	data.height = 16777215;
 	splitted = ft_split(s, ',');
 	if (!splitted)

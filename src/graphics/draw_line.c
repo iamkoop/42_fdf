@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 17:05:08 by nildruon          #+#    #+#             */
-/*   Updated: 2026/04/03 07:36:26 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/04/03 08:07:27 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ static void	bresenham_line_algo(t_img_data *img, t_line_data *l_data, int colr)
 	while (1)
 	{
 		my_mlx_pixel_put(img, l_data->x1, l_data->y1, colr);
-		if (l_data->x1 == l_data->x2)
-			break ;
+		if (l_data->x1 == l_data->x2 && l_data->y1 == l_data->y2)
+			break;
 		vars.e2 = 2 * vars.error;
 		if (vars.e2 >= vars.dy)
 		{
@@ -56,8 +56,6 @@ static void	bresenham_line_algo(t_img_data *img, t_line_data *l_data, int colr)
 		}
 		if (vars.e2 <= vars.dx)
 		{
-			if (l_data->y1 == l_data->y2)
-				break ;
 			vars.error = vars.error + vars.dx;
 			l_data->y1 = l_data->y1 + vars.sy;
 		}

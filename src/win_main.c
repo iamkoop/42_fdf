@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 07:38:11 by nildruon          #+#    #+#             */
-/*   Updated: 2026/04/03 07:45:35 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/04/03 19:04:47 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,22 @@ static void	calculations(t_data	**data, t_input_size input_size)
 	set_iso_coords(data, input_size, scaling);
 }
 
-/*int	close_win(void *mlx, void *window)
+int	close_win(int keypres, void *vars)
 {
+	if(keypres == XK_Escape)
+		printf("ESCAPE!\n");
+	else
+		printf("X");
+	free_the_data((void **)(((t_vars *)vars)->data), ((t_vars *)vars)->input_size.height -1);
 	exit(0);
-	return (0);
-}*/
+}
 
 int	window_main(t_data	**data, t_input_size input_size)
 {
 	void		*mlx;
 	void		*window;
 	t_img_data	img;
+	t_vars		vars = {0};
 
 	mlx = mlx_init();
 	if (!mlx)
@@ -56,8 +61,14 @@ int	window_main(t_data	**data, t_input_size input_size)
 	calculations(data, input_size);
 	draw_full_img(&img, input_size, data);
 	mlx_put_image_to_window(mlx, window, img.img, 0, 0);
-	//mlx_hook(vars.win, 2, 1L<<0, close, &vars);
+	vars.mlx = mlx;
+	vars.window = window;
+	vars.data = &data;
+	vars.input_size = input_size;
+	printf("%d", input_size.width);
+	mlx_hook(window, KeyPress, KeyPressMask, close_win, (void *)&vars);
+	mlx_hook(window, DestroyNotify, StructureNotifyMask, close_win, (void *)&vars);
 	mlx_loop(mlx);
-	//mlx_hook(window, 17, 0, close_win(mlx, window), mlx);
 	return (1);
 }
+

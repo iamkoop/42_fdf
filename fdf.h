@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 15:08:07 by nildruon          #+#    #+#             */
-/*   Updated: 2026/04/03 07:31:06 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/04/03 18:55:05 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include <errno.h>
 # include <stdio.h>
 # include <math.h>
+# include <X11/X.h>
+# include <X11/keysym.h>
 
 typedef struct s_data
 {
@@ -81,6 +83,14 @@ typedef struct s_limit
 	int	width;
 	int	height;
 }		t_limit;
+
+typedef struct s_vars
+{
+	void			*mlx;
+	void			*window;
+	t_data			***data;
+	t_input_size	input_size;
+}		t_vars;
 
 //calculations
 void	set_iso_xy_help(t_data	**dat, t_scaling	scaling, int x, int y);
