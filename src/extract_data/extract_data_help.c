@@ -6,11 +6,11 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 14:27:18 by nildruon          #+#    #+#             */
-/*   Updated: 2026/03/22 16:20:44 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/04/03 07:17:21 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../fdf.h"
 
 static t_data	fill_with_data(char *s)
 {

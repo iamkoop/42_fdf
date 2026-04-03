@@ -6,11 +6,11 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:43:46 by nildruon          #+#    #+#             */
-/*   Updated: 2026/03/31 21:15:07 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/04/03 07:45:45 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../fdf.h"
 
 void	free_the_data(void **data, int until_where)
 {

@@ -6,11 +6,11 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/25 17:01:42 by nildruon          #+#    #+#             */
-/*   Updated: 2026/03/31 21:24:41 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/04/03 07:36:20 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../fdf.h"
 
 static t_line_data	*set_coords(t_data	p1, t_data	p2)
 {

@@ -6,12 +6,11 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 17:42:54 by nildruon          #+#    #+#             */
-/*   Updated: 2026/03/31 21:24:59 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/04/03 07:17:10 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
-#include <stdio.h>
+#include "../fdf.h"
 
 static int	find_line_len(char *curr_line)
 {

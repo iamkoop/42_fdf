@@ -6,11 +6,11 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 17:05:08 by nildruon          #+#    #+#             */
-/*   Updated: 2026/03/31 21:20:17 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/04/03 07:36:26 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../fdf.h"
 
 static void	my_mlx_pixel_put(t_img_data *data, int x, int y, int color)
 {

@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 15:08:07 by nildruon          #+#    #+#             */
-/*   Updated: 2026/03/31 21:16:57 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/04/03 07:31:06 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,15 @@ typedef struct s_limit
 	int	width;
 	int	height;
 }		t_limit;
+
+//calculations
+void	set_iso_xy_help(t_data	**dat, t_scaling	scaling, int x, int y);
+void	set_iso_coords(t_data	**dat, t_input_size input_s, t_scaling scl);
+void	find_limits(t_data	**data, t_input_size input_size, t_limit *lim);
+void	calc_zoom(t_scaling *scaling, t_limit limits);
+void	calc_offset(t_scaling *scaling, t_limit limits);
+void	set_limit(t_limit *limit);
+void	set_scaling(t_scaling *scaling);
 
 void	draw_full_img(t_img_data *img, t_input_size input_size, t_data	**data);
 void	draw_line(t_img_data *img, t_line_data *line_data, int color);

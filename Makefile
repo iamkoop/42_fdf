@@ -6,7 +6,7 @@
 #    By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/10 17:12:08 by nildruon          #+#    #+#              #
-#    Updated: 2026/03/25 17:03:02 by nildruon         ###   ########.fr        #
+#    Updated: 2026/04/03 07:45:25 by nildruon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,10 @@ CFLAGS = -Werror -Wall -Wextra -g -Ilibft_lib
 
 FDFFLAGS = -L. -lmlx -lXext -lX11 -lm
 
-CFILES = draw_full_img.c draw_line.c projection.c extract_data.c extract_data_help.c main.c
+CFILES = src/calculations_for_projections/calculations.c src/calculations_for_projections/calculations_help.c \
+		src/extract_data/extract_data.c src/extract_data/extract_data_help.c \
+		src/graphics/draw_full_img.c src/graphics/draw_line.c \
+		src/win_main.c src/main.c
 
 OFILES = $(CFILES:.c=.o)
 
