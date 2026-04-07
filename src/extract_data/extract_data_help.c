@@ -6,13 +6,48 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 14:27:18 by nildruon          #+#    #+#             */
-/*   Updated: 2026/04/03 08:06:00 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/04/07 20:34:32 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 
-static t_data	fill_with_data(char *s)
+static int is_num(char *s)
+{
+	int i;
+
+	i = 0;
+	while(s[i] && s[i] != '\n')
+	{
+		if(!ft_isdigit(s[i]))
+			return(0);
+		i++;
+	}
+	return(1);
+}
+
+static int colour_is_valid(char *s)
+{
+	int i;
+
+	if(ft_strlen(s) > 8 || ft_strlen(s) <= 2)
+		return(0);
+	if(!(s[0] == '0' && (s[1] == 'x' || s[1] == 'X')))
+		return(0);
+	i = 2;
+	while (s[i])
+	{
+		if((s[i] >= 'A' && s[i] <= 'F') || (s[i] >= 'a' && s[i] <= 'f'))
+			i++;
+		else if(ft_isdigit(s[i]))
+			i++;
+		else
+			return(0);
+	}
+	return(1);
+}
+
+static t_data	fill_with_data(char *s, int	*valid)
 {
 	t_data	data;
 	char	**splitted;
@@ -25,12 +60,19 @@ static t_data	fill_with_data(char *s)
 		return (data);
 	while (splitted[len])
 		len++;
+	if(!is_num(splitted[0]))
+	{
+		*valid = 0;
+		return(free_the_split(splitted), data);
+	}
 	data.height = ft_atoi(splitted[0]);
 	if (len == 2)
 		data.colour = 16777215;
 	else
 		data.colour = 16777215;
-	free_the_data((void **)splitted, len -1);
+	if((len == 2 && (splitted[1] && !colour_is_valid(splitted[1]))))
+		*valid = 0;
+	free_the_split(splitted);
 	return (data);
 }
 
@@ -39,6 +81,7 @@ static t_data	*data_from_line(char	*line, int width)
 	char	**data;
 	t_data	*data_from_l;
 	int		i;
+	int 	valid;
 
 	if (!line)
 		return (NULL);
@@ -47,14 +90,18 @@ static t_data	*data_from_line(char	*line, int width)
 		return (NULL);
 	data_from_l = malloc(sizeof(t_data) * width);
 	if (!data_from_l)
-		return (free_the_data((void **)data, -1), NULL);
+		return (free_the_split(data), NULL);
 	i = 0;
+	valid = 1;
 	while (i < width && data[i])
 	{
-		data_from_l[i] = fill_with_data(data[i]);
+		data_from_l[i] = fill_with_data(data[i], &valid);
 		i++;
 	}
-	free_the_data((void **)data, -1);
+	free_the_split(data);
+	errno = EINVAL;
+	if(valid == 0)
+		return(perror("In the given file there is a: "), NULL);
 	return (data_from_l);
 }
 
@@ -76,10 +123,10 @@ t_data	**create_2d_data_arr(char *file, int height, int width)
 	{
 		gnl = get_next_line(fd);
 		if (!gnl)
-			return (free_the_data((void **)data, size), close(fd), NULL);
+			return (free_the_data(data, size), close(fd), NULL);
 		data[size] = data_from_line(gnl, width);
 		if (!data[size])
-			return (free_the_data((void **)data, size),
+			return (free_the_data(data, size),
 				free(gnl), close(fd), get_next_line(-42), NULL);
 		free(gnl);
 		size++;

@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 17:42:54 by nildruon          #+#    #+#             */
-/*   Updated: 2026/04/03 14:53:04 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/04/07 17:38:33 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,25 @@ static int	find_line_len(char *curr_line)
 {
 	char	**splitted;
 	int		len;
+	int		i;
 
 	len = 0;
 	splitted = ft_split(curr_line, ' ');
 	if (!splitted)
 		return (0);
 	while (splitted[len] && splitted[len][0] != '\n')
-	{
-		free(splitted[len]);
 		len++;
+	i = 0;
+	while (splitted[i])
+	{
+		free(splitted[i]);
+		i++;
 	}
 	free(splitted);
 	return (len);
 }
 
-static int	find_size(int *height, int *width, char *file)
+static int	find_size(int *height, int *width, char *file, int cmp)
 {
 	int		fd;
 	char	*line;
@@ -42,9 +46,11 @@ static int	find_size(int *height, int *width, char *file)
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (((*height > 0) && (*width != find_line_len(line))))
-			return (perror("invalid map"), free(line), get_next_line(-42), 0);
-		*width = find_line_len(line);
+		cmp = find_line_len(line);
+		if (((*height > 0) && (*width != cmp)))
+			return (perror("invalid map"), free(line), 
+					get_next_line(-42), close(fd), 0);
+		*width = cmp;
 		free(line);
 		line = get_next_line(fd);
 		*height += 1;
@@ -60,7 +66,7 @@ t_data	**extract_data(char *file, int *s, t_input_size *input_size)
 {
 	t_data	**data;
 
-	if (!find_size(&input_size->height, &input_size->width, file))
+	if (!find_size(&input_size->height, &input_size->width, file, 0))
 		return (NULL);
 	data = create_2d_data_arr(file, input_size->height, input_size->width);
 	if (!data)

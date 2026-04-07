@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 07:38:11 by nildruon          #+#    #+#             */
-/*   Updated: 2026/04/03 19:59:47 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/04/07 19:17:00 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,26 @@ static void	calculations(t_data	**data, t_input_size input_size)
 int close_win(void *param) {
   t_vars *vars = (t_vars *)param;
 
-  if (vars->data)
-    free_the_data((void **)vars->data, vars->input_size.height - 1);
-  exit(0);
-  return (0);
+	if (vars->data && *vars->data)
+		free_the_data(*vars->data, vars->input_size.height - 1);
+	if(vars->img && vars->img->img && vars->mlx)
+		mlx_destroy_image(vars->mlx, vars->img->img);
+	if(vars->window && vars->mlx)
+		mlx_destroy_window(vars->mlx, vars->window);
+	if(vars->mlx)
+		mlx_destroy_display(vars->mlx);
+	if(vars->mlx)
+		free(vars->mlx);
+	exit(0);
 }
 
-int key_hook(int keycode, void *param) {
-  if (keycode == XK_Escape)
-    close_win(param);
-  return (0);
+int	key_hook(int keycode, void *param)
+{
+	if (keycode == XK_Escape)
+	{
+		close_win(param);	
+	}
+	return (0);
 }
 
 int	window_main(t_data	**data, t_input_size input_size, t_vars *vars)
@@ -56,12 +66,14 @@ int	window_main(t_data	**data, t_input_size input_size, t_vars *vars)
 		return (perror("error with init func"), 0);
 	window = mlx_new_window(mlx, 720, 720, "FDF");
 	if (!window)
-		return (mlx_destroy_window(mlx, window), free(mlx), 0);
+		return (free(mlx), 0);
 	img.img = mlx_new_image(mlx, 720, 720);
 	if (!img.img)
 		return (mlx_destroy_window(mlx, window), free(mlx), 0);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
 			&img.endian);
+	if(!img.addr)
+		return(0);
 	calculations(data, input_size);
 	draw_full_img(&img, input_size, data);
 	mlx_put_image_to_window(mlx, window, img.img, 0, 0);
@@ -69,6 +81,7 @@ int	window_main(t_data	**data, t_input_size input_size, t_vars *vars)
 	vars->window = window;
 	vars->data = &data;
 	vars->input_size = input_size;
+	vars->img = &img;
 	mlx_hook(window, KeyPress, KeyPressMask, key_hook, (void *)vars);
 	mlx_hook(window, DestroyNotify, StructureNotifyMask, close_win, (void *)vars);
 	mlx_loop(mlx);
