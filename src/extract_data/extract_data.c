@@ -6,35 +6,29 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 17:42:54 by nildruon          #+#    #+#             */
-/*   Updated: 2026/04/07 17:38:33 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/04/08 12:38:19 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 
-static int	find_line_len(char *curr_line)
+int	cnt_words2(char const *s, char c)
 {
-	char	**splitted;
-	int		len;
-	int		i;
+	int	i;
+	int	cnt;
 
-	len = 0;
-	splitted = ft_split(curr_line, ' ');
-	if (!splitted)
-		return (0);
-	while (splitted[len] && splitted[len][0] != '\n')
-		len++;
 	i = 0;
-	while (splitted[i])
+	cnt = 0;
+	while (s[i])
 	{
-		free(splitted[i]);
+		if (s[i] != c && ((s[i + 1] == c) || s[i + 1] == '\0'))
+			cnt++;
 		i++;
 	}
-	free(splitted);
-	return (len);
+	return (cnt);
 }
 
-static int	find_size(int *height, int *width, char *file, int cmp)
+int	find_size(int *height, int *width, char *file, int cmp)
 {
 	int		fd;
 	char	*line;
@@ -46,10 +40,10 @@ static int	find_size(int *height, int *width, char *file, int cmp)
 	line = get_next_line(fd);
 	while (line)
 	{
-		cmp = find_line_len(line);
+		cmp = cnt_words2(line, ' ');
 		if (((*height > 0) && (*width != cmp)))
-			return (perror("invalid map"), free(line), 
-					get_next_line(-42), close(fd), 0);
+			return (perror("invalid map"), free(line),
+				get_next_line(-42), close(fd), 0);
 		*width = cmp;
 		free(line);
 		line = get_next_line(fd);

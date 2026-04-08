@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 13:55:28 by nildruon          #+#    #+#             */
-/*   Updated: 2026/03/16 12:47:25 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/04/08 13:00:37 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,19 @@
 
 # ifndef BUFFER_SIZE
 
-#  define BUFFER_SIZE 42
+#  define BUFFER_SIZE 10000
 # endif
 
-char	*get_next_line(int fd);
-size_t	ft_strlength(const char *s);
-char	*ft_strdup(const char *s);
-char	*read_buffer(int *read_r, int fd);
-int		found_new_line(char *str);
-void	extract_line_help(char *buffer, char *line, char **remainder, int i);
+typedef struct s_buffer
+{
+	char			buffer[BUFFER_SIZE +1];
+	int				index;
+	int				used;
+	struct s_buffer	*next;
+}					t_buffer;
+
+char		*get_next_line(int fd);
+t_buffer	*ft_gnl_lstnew(void);
+void		ft_gnl_lstadd(t_buffer **lst, t_buffer *new_node);
+void		ft_gnl_lstclear(t_buffer **lst);
 #endif

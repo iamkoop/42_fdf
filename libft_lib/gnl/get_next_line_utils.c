@@ -6,95 +6,55 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 11:30:43 by nildruon          #+#    #+#             */
-/*   Updated: 2026/03/16 12:47:34 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/04/08 13:00:10 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlength(const char *s)
+t_buffer	*ft_gnl_lstnew(void)
 {
-	size_t	size;
+	t_buffer	*new;
 
-	size = 0;
-	if (!s)
-		return (0);
-	while (s[size])
-	{
-		size++;
-	}
-	return (size);
-}
-
-char	*ft_strdup(const char *s)
-{
-	size_t	len;
-	char	*cpy;
-	size_t	i;
-
-	len = ft_strlength(s);
-	cpy = (char *)malloc(len + 1);
-	if (!cpy)
+	new = malloc(sizeof(t_buffer));
+	if (!new)
 		return (NULL);
-	i = 0;
-	while (i <= len)
-	{
-		cpy[i] = s[i];
-		i++;
-	}
-	return (cpy);
+	new->index = 0;
+	new->used = 0;
+	new->next = NULL;
+	return (new);
 }
 
-char	*read_buffer(int *read_r, int fd)
+void	ft_gnl_lstadd(t_buffer **lst, t_buffer *new_node)
 {
-	char	*buffer;
-	char	*result;
+	t_buffer	*l;
 
-	buffer = malloc(BUFFER_SIZE + 1);
-	if (!buffer)
+	if (!lst || !new_node)
+		return ;
+	if (!*lst)
 	{
-		*read_r = -1;
-		return (NULL);
+		*lst = new_node;
+		return ;
 	}
-	*read_r = read(fd, buffer, BUFFER_SIZE);
-	if (*read_r <= 0)
-	{
-		free(buffer);
-		return (NULL);
-	}
-	buffer[*read_r] = '\0';
-	result = ft_strdup(buffer);
-	free(buffer);
-	return (result);
+	l = *lst;
+	while (l->next)
+		l = l->next;
+	l->next = new_node;
 }
 
-int	found_new_line(char *str)
+void	ft_gnl_lstclear(t_buffer **lst)
 {
-	size_t	i;
+	t_buffer	*nxt;
+	t_buffer	*curr;
 
-	if (!str)
-		return (0);
-	i = 0;
-	while (str[i])
+	if (!lst || !*lst)
+		return ;
+	curr = *lst;
+	while (curr)
 	{
-		if (str[i] == '\n')
-			return (1);
-		i++;
+		nxt = curr->next;
+		free(curr);
+		curr = nxt;
 	}
-	return (0);
-}
-
-void	extract_line_help(char *buffer, char *line, char **remainder, int i)
-{
-	if (buffer[i] == '\n')
-	{
-		line[i] = '\n';
-		line[i + 1] = '\0';
-		*remainder = ft_strdup(buffer + i + 1);
-	}
-	else
-	{
-		line[i] = '\0';
-		*remainder = NULL;
-	}
+	*lst = NULL;
 }

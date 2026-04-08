@@ -6,101 +6,156 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 11:30:43 by nildruon          #+#    #+#             */
-/*   Updated: 2026/03/20 12:04:56 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/04/08 13:05:14 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static char	*extract_line(char	*buffer, char	**remainder)
+static int	search_in_remainder(t_buffer **rem)
 {
-	char	*line;
-	int		i;
+	t_buffer	*tmp;
+	int			i;
 
-	i = 0;
-	while (buffer[i] && buffer[i] != '\n')
-		i++;
-	line = malloc(i + 2);
-	if (!line)
-		return (free(buffer), *remainder = NULL, NULL);
-	i = 0;
-	while (buffer[i] && buffer[i] != '\n')
+	if (!rem || !*rem)
+		return (0);
+	tmp = *rem;
+	while (tmp)
 	{
-		line[i] = buffer[i];
-		i++;
+		i = tmp->index;
+		while (tmp->buffer[i])
+		{
+			if (tmp->buffer[i] == '\n')
+				return (1);
+			i++;
+		}
+		tmp = tmp->next;
 	}
-	extract_line_help(buffer, line, remainder, i);
-	if (buffer[i] == '\n' && !*remainder)
-		return (free(line), free(buffer), NULL);
-	free(buffer);
-	return (line);
+	return (0);
 }
 
-static char	*ft_strjoin(char *buffer, char **remainder)
+static void	remove_used(t_buffer **rem)
 {
-	char	*concant;
-	int		buffer_l;
-	int		remainder_len;
-	int		i;
+	t_buffer	*nxt;
+	t_buffer	*curr;
 
-	if (!*remainder)
-		return (concant = ft_strdup(buffer));
-	buffer_l = ft_strlength(buffer);
-	remainder_len = ft_strlength(*remainder);
-	concant = malloc(buffer_l + remainder_len + 1);
-	if (!concant)
-		return (free(*remainder),*remainder = NULL, NULL);
-	i = 0;
-	while ((*remainder)[i])
+	curr = *rem;
+	while (curr && curr->used == 1)
 	{
-		concant[i] = (*remainder)[i];
-		i++;
+		nxt = curr->next;
+		free(curr);
+		curr = nxt;
 	}
-	buffer_l = 0;
-	while (buffer[buffer_l])
-		concant[i++] = buffer[buffer_l++];
-	concant[i] = '\0';
-	free(*remainder);
-	*remainder = NULL;
-	return (concant);
+	*rem = curr;
 }
 
-static char	*free_and_return(char **remainder)
+static int	line_help(t_buffer	**rem)
 {
-	if (!*remainder || !**remainder)
+	t_buffer	*stack;
+	int			i;
+	int			cnt;
+
+	cnt = 0;
+	stack = *rem;
+	while (stack)
 	{
-		free(*remainder);
-		*remainder = NULL;
+		i = stack->index;
+		while (stack->buffer[i])
+		{
+			cnt++;
+			if (stack->buffer[i] == '\n')
+				return (cnt);
+			i++;
+		}
+		stack = stack->next;
+	}
+	return (cnt);
+}
+
+static char	*line(t_buffer **rem, int full_ret_len)
+{
+	t_buffer	*stack;
+	char		*str;
+	int			cnt;
+
+	if (!rem || !*rem)
 		return (NULL);
+	full_ret_len = line_help(rem);
+	str = malloc(full_ret_len + 1);
+	if (!str)
+		return (NULL);
+	cnt = 0;
+	stack = *rem;
+	while (stack && cnt < full_ret_len)
+	{
+		while (stack->buffer[stack->index] && cnt < full_ret_len)
+			str[cnt++] = stack->buffer[stack->index++];
+		if (stack->buffer[stack->index] == '\0')
+			stack->used = 1;
+		stack = stack->next;
 	}
-	return (*remainder);
+	str[cnt] = '\0';
+	return (str);
+}
+
+static int	scan_for_nl(char *s, int r)
+{
+	int	i;
+
+	i = 0;
+	while (i < r)
+	{
+		if (s[i] == '\n')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+static int	read_buffer(int fd, t_buffer **remainder, int *nl)
+{
+	int			r;
+	t_buffer	*node;
+
+	node = ft_gnl_lstnew();
+	if (!node)
+		return (-1);
+	r = read(fd, node->buffer, BUFFER_SIZE);
+	if (r <= 0)
+		return (free(node), 0);
+	node->buffer[r] = '\0';
+	*nl = scan_for_nl(node->buffer, r);
+	if (!node)
+		return (-1);
+	if (!remainder || !*remainder)
+		*remainder = node;
+	else
+		ft_gnl_lstadd(remainder, node);
+	return (r);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*remainder = NULL;
-	char		*line;
-	int			r;
+	static t_buffer		*remainder;
+	int					r;
+	int					nl_found;
+	char				*ret_line;
 
 	r = 1;
 	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (free(remainder), remainder = NULL, NULL);
-	line = NULL;
-	while (!found_new_line(remainder) && r > 0)
+		return (ft_gnl_lstclear(&remainder), NULL);
+	nl_found = 0;
+	if (search_in_remainder(&remainder))
+		nl_found = 1;
+	while (r > 0)
 	{
-		line = read_buffer(&r, fd);
+		if (r == 0 || nl_found)
+			break ;
+		r = read_buffer(fd, &remainder, &nl_found);
 		if (r == -1)
-			return (free(remainder), remainder = NULL, NULL);
-		if (r == 0)
-			break ;
-		if (!line)
-			break ;
-		remainder = ft_strjoin(line, &remainder);
-		free(line);
-		if (!remainder)
-			break ;
+			return (ft_gnl_lstclear(&remainder), NULL);
 	}
-	if (!free_and_return(&remainder))
-		return (NULL);
-	return (extract_line(remainder, &remainder));
+	ret_line = line(&remainder, 0);
+	remove_used(&remainder);
+	return (ret_line);
 }

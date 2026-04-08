@@ -6,45 +6,51 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 14:27:18 by nildruon          #+#    #+#             */
-/*   Updated: 2026/04/07 20:34:32 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/04/08 12:37:32 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../fdf.h"
 
-static int is_num(char *s)
+static int	is_num(char *s)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while(s[i] && s[i] != '\n')
+	while (s[i] && s[i] != '\n')
 	{
-		if(!ft_isdigit(s[i]))
-			return(0);
+		if (!(s[0] == '-' || ft_isdigit(s[0])))
+			return (0);
+		if (i > 0 &&!ft_isdigit(s[i]))
+			return (0);
 		i++;
 	}
-	return(1);
+	return (1);
 }
 
-static int colour_is_valid(char *s)
+static int	colour_is_valid(char *s)
 {
-	int i;
+	int	i;
+	int	len;
 
-	if(ft_strlen(s) > 8 || ft_strlen(s) <= 2)
-		return(0);
-	if(!(s[0] == '0' && (s[1] == 'x' || s[1] == 'X')))
-		return(0);
+	len = ft_strlen(s);
+	if (len > 0 && s[len - 1] == '\n')
+		len--;
+	if (len > 8 || len <= 2)
+		return (0);
+	if (!(s[0] == '0' && (s[1] == 'x' || s[1] == 'X')))
+		return (0);
 	i = 2;
-	while (s[i])
+	while (s[i] && s[i] != '\n')
 	{
-		if((s[i] >= 'A' && s[i] <= 'F') || (s[i] >= 'a' && s[i] <= 'f'))
+		if ((s[i] >= 'A' && s[i] <= 'F') || (s[i] >= 'a' && s[i] <= 'f'))
 			i++;
-		else if(ft_isdigit(s[i]))
+		else if (ft_isdigit(s[i]))
 			i++;
 		else
-			return(0);
+			return (0);
 	}
-	return(1);
+	return (1);
 }
 
 static t_data	fill_with_data(char *s, int	*valid)
@@ -60,17 +66,17 @@ static t_data	fill_with_data(char *s, int	*valid)
 		return (data);
 	while (splitted[len])
 		len++;
-	if(!is_num(splitted[0]))
+	if (!is_num(splitted[0]))
 	{
 		*valid = 0;
-		return(free_the_split(splitted), data);
+		return (free_the_split(splitted), data);
 	}
 	data.height = ft_atoi(splitted[0]);
 	if (len == 2)
 		data.colour = 16777215;
 	else
 		data.colour = 16777215;
-	if((len == 2 && (splitted[1] && !colour_is_valid(splitted[1]))))
+	if ((len == 2 && (splitted[1] && !colour_is_valid(splitted[1]))))
 		*valid = 0;
 	free_the_split(splitted);
 	return (data);
@@ -81,7 +87,7 @@ static t_data	*data_from_line(char	*line, int width)
 	char	**data;
 	t_data	*data_from_l;
 	int		i;
-	int 	valid;
+	int		valid;
 
 	if (!line)
 		return (NULL);
@@ -100,8 +106,8 @@ static t_data	*data_from_line(char	*line, int width)
 	}
 	free_the_split(data);
 	errno = EINVAL;
-	if(valid == 0)
-		return(perror("In the given file there is a: "), NULL);
+	if (valid == 0)
+		return (perror("In the given file there is a: "), NULL);
 	return (data_from_l);
 }
 
