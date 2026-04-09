@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 07:38:11 by nildruon          #+#    #+#             */
-/*   Updated: 2026/04/08 12:57:09 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/04/09 15:50:54 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,27 +68,25 @@ static int	hookers(t_vars	*vars)
 
 int	window_main(t_data	**data, t_input_size input_size, t_vars *vars)
 {
-	void		*mlx;
 	void		*window;
 	t_img_data	img;
 
-	mlx = mlx_init();
-	if (!mlx)
+	vars->mlx = mlx_init();
+	if (!vars->mlx)
 		return (perror("error with init func"), 0);
-	window = mlx_new_window(mlx, 720, 720, "FDF");
+	window = mlx_new_window(vars->mlx, 720, 720, "FDF");
 	if (!window)
-		return (free(mlx), 0);
-	img.img = mlx_new_image(mlx, 720, 720);
+		return (free(vars->mlx), 0);
+	img.img = mlx_new_image(vars->mlx, 720, 720);
 	if (!img.img)
-		return (mlx_destroy_window(mlx, window), free(mlx), 0);
+		return (mlx_destroy_window(vars->mlx, window), free(vars->mlx), 0);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
 			&img.endian);
 	if (!img.addr)
 		return (0);
 	calculations(data, input_size);
 	draw_full_img(&img, input_size, data);
-	mlx_put_image_to_window(mlx, window, img.img, 0, 0);
-	vars->mlx = mlx;
+	mlx_put_image_to_window(vars->mlx, window, img.img, 0, 0);
 	vars->window = window;
 	vars->data = &data;
 	vars->input_size = input_size;

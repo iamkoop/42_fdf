@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 13:55:28 by nildruon          #+#    #+#             */
-/*   Updated: 2026/04/08 13:00:37 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/04/09 15:40:34 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,6 @@ char		*get_next_line(int fd);
 t_buffer	*ft_gnl_lstnew(void);
 void		ft_gnl_lstadd(t_buffer **lst, t_buffer *new_node);
 void		ft_gnl_lstclear(t_buffer **lst);
+void		remove_used(t_buffer **rem);
+int			search_in_remainder(t_buffer **rem);
 #endif
