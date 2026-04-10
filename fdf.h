@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 15:08:07 by nildruon          #+#    #+#             */
-/*   Updated: 2026/04/09 15:41:04 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/04/10 20:38:21 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ typedef struct s_vars
 {
 	void			*mlx;
 	void			*window;
-	t_data			***data;
+	t_data			**data;
 	t_input_size	input_size;
 	t_img_data		*img;
 }		t_vars;

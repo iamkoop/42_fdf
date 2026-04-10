@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 07:38:11 by nildruon          #+#    #+#             */
-/*   Updated: 2026/04/10 20:00:58 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/04/10 20:39:10 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,33 +35,16 @@ static int	close_win(void *param)
 	t_vars	*vars;
 
 	vars = (t_vars *)param;
-	if(!vars->data)
-		printf("DATA is NULL\n");
 	if (vars->data)
-	{
-		printf("1\n");
-		free_the_data(*vars->data, vars->input_size.height - 1);
-	}
+		free_the_data(vars->data, vars->input_size.height - 1);
 	if (vars->img && vars->img->img && vars->mlx)
-	{
-		printf("2\n");
 		mlx_destroy_image(vars->mlx, vars->img->img);
-	}
 	if (vars->window && vars->mlx)
-	{
-		printf("3\n");
 		mlx_destroy_window(vars->mlx, vars->window);
-	}
 	if (vars->mlx)
-	{
-		printf("4\n");
 		mlx_destroy_display(vars->mlx);
-	}
 	if (vars->mlx)
-	{
-		printf("5\n");
 		free(vars->mlx);	
-	}
 	exit(0);
 }
 
@@ -87,7 +70,7 @@ int	window_main(t_data	**data, t_input_size input_size, t_vars *vars)
 {
 	t_img_data	img;
 
-	vars->data = &data;
+	vars->data = data;
 	vars->input_size = input_size;
 	vars->mlx = mlx_init();
 	if (!vars->mlx)
@@ -95,8 +78,6 @@ int	window_main(t_data	**data, t_input_size input_size, t_vars *vars)
 	vars->window = mlx_new_window(vars->mlx, 720, 720, "FDF");
 	if (!vars->window)
 		return (close_win(vars));
-	if(!data)
-		printf("WTF");
 	img.img = mlx_new_image(vars->mlx, 720, 720);
 	if (!img.img)
 		return (close_win(vars));
