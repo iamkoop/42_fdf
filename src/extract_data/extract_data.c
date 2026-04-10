@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 17:42:54 by nildruon          #+#    #+#             */
-/*   Updated: 2026/04/08 12:38:19 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/04/10 17:35:58 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	find_size(int *height, int *width, char *file, int cmp)
 		*height += 1;
 	}
 	if (errno != 0)
-		return (perror("error with GNL"), 0);
+		return (get_next_line(-42), close(fd), perror("error with GNL"), 0);
 	get_next_line(-42);
 	close(fd);
 	return (1);

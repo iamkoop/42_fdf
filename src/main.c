@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 14:43:46 by nildruon          #+#    #+#             */
-/*   Updated: 2026/04/09 16:04:56 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/04/10 17:33:46 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ int	main(int argc, char **argv)
 	if (!data)
 		return (0);
 	win = window_main(data, input_size, &vars);
+	free_the_data(data, size -1);
 	if (!win)
 		return (0);
-	free_the_data(data, size -1);
 	return (1);
 }
