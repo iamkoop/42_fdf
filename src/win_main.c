@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 07:38:11 by nildruon          #+#    #+#             */
-/*   Updated: 2026/04/10 20:39:10 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/04/10 20:56:10 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	close_win(void *param)
 	if (vars->mlx)
 		mlx_destroy_display(vars->mlx);
 	if (vars->mlx)
-		free(vars->mlx);	
+		free(vars->mlx);
 	exit(0);
 }
 
@@ -74,7 +74,7 @@ int	window_main(t_data	**data, t_input_size input_size, t_vars *vars)
 	vars->input_size = input_size;
 	vars->mlx = mlx_init();
 	if (!vars->mlx)
-		return (close_win(vars), perror("error with init func"),0);
+		return (close_win(vars), perror("error with init func"), 0);
 	vars->window = mlx_new_window(vars->mlx, 720, 720, "FDF");
 	if (!vars->window)
 		return (close_win(vars));

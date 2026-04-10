@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 14:27:18 by nildruon          #+#    #+#             */
-/*   Updated: 2026/04/10 20:25:25 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/04/10 21:05:00 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ static t_data	*data_from_line(char	*line, int width)
 	free_the_split(data);
 	errno = EINVAL;
 	if (valid == 0)
-		return (free(data_from_l), perror("In the given file there is a: "), NULL);
+		return (free(data_from_l), perror("The file there is a: "), NULL);
 	return (data_from_l);
 }
 
