@@ -6,7 +6,7 @@
 /*   By: nildruon <nildruon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/17 14:27:18 by nildruon          #+#    #+#             */
-/*   Updated: 2026/04/10 21:05:00 by nildruon         ###   ########.fr       */
+/*   Updated: 2026/04/12 19:30:16 by nildruon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static t_data	fill_with_data(char *s, int	*valid)
 	data.height = 16777215;
 	splitted = ft_split(s, ',');
 	if (!splitted)
-		return (data);
+		return (data.height = -1, data);
 	while (splitted[len])
 		len++;
 	if (!is_num(splitted[0]))
@@ -82,12 +82,10 @@ static t_data	fill_with_data(char *s, int	*valid)
 	return (data);
 }
 
-static t_data	*data_from_line(char	*line, int width)
+static t_data	*data_from_line(char *line, int width, int i, int valid)
 {
 	char	**data;
 	t_data	*data_from_l;
-	int		i;
-	int		valid;
 
 	if (!line)
 		return (NULL);
@@ -97,11 +95,12 @@ static t_data	*data_from_line(char	*line, int width)
 	data_from_l = malloc(sizeof(t_data) * width);
 	if (!data_from_l)
 		return (free_the_split(data), NULL);
-	i = 0;
-	valid = 1;
 	while (i < width && data[i])
 	{
 		data_from_l[i] = fill_with_data(data[i], &valid);
+		if (data_from_l[i].height == -1)
+			return (free_the_split(data), free(data_from_l),
+				perror("The file there is a: "), NULL);
 		i++;
 	}
 	free_the_split(data);
@@ -129,13 +128,13 @@ t_data	**create_2d_data_arr(char *file, int height, int width)
 	{
 		gnl = get_next_line(fd);
 		if (!gnl)
-			return (free_the_data(data, size), close(fd), NULL);
-		data[size] = data_from_line(gnl, width);
-		if (!data[size])
 			return (free_the_data(data, size),
+				get_next_line(-42), close(fd), NULL);
+		data[size] = data_from_line(gnl, width, 0, 1);
+		if (!data[size++])
+			return (free_the_data(data, --size),
 				free(gnl), close(fd), get_next_line(-42), NULL);
 		free(gnl);
-		size++;
 	}
 	return (get_next_line(-42), close(fd), data);
 }
